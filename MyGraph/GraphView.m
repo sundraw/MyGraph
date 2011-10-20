@@ -19,7 +19,79 @@
     return self;
 }
 
-float data[] = {0.7, 0.4, 0.9, 1.0, 0.2, 0.85, 0.11, 0.75, 0.53, 0.44, 0.88, 0.77};
+float data[] = {0.7, 0.4, 0.9, 1.0, 0.2, 0.85, 0.11, 0.75, 0.53, 0.44, 0.88, 0.77, 0.99, 0.55};
+
+- (void)drawLineGraphWithContext:(CGContextRef)ctx
+{
+    CGContextSetLineWidth(ctx, 2.0);
+	CGContextSetStrokeColorWithColor(ctx, [[UIColor colorWithRed:1.0 green:0.5 blue:0 alpha:1.0] CGColor]);
+    
+    int maxGraphHeight = kGraphHeight - kOffsetY;
+    
+    // Defining the gradient
+    
+    CGGradientRef gradient;
+    CGColorSpaceRef colorspace;
+    size_t num_locations = 2;
+    CGFloat locations[2] = {0.0, 1.0};
+    CGFloat components[8] = {1.0, 0.5, 0.0, 0.2,  // Start color
+        1.0, 0.5, 0.0, 1.0}; // End color
+    colorspace = CGColorSpaceCreateDeviceRGB(); 
+    gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
+    
+    CGPoint startPoint, endPoint;
+    startPoint.x = kOffsetX;
+    startPoint.y = kGraphHeight;
+    endPoint.x = kOffsetX;
+    endPoint.y = kOffsetY;
+    
+    // Drawing the solid fill
+    
+    CGContextSetFillColorWithColor(ctx, [[UIColor colorWithRed:1.0 green:0.5 blue:0 alpha:0.5] CGColor]);
+    CGContextBeginPath(ctx);
+    CGContextMoveToPoint(ctx, kOffsetX, kGraphHeight);
+    CGContextAddLineToPoint(ctx, kOffsetX, kGraphHeight - maxGraphHeight * data[0]);
+    for (int i = 1; i < sizeof(data); i++) 
+    {
+        CGContextAddLineToPoint(ctx, kOffsetX + i * kStepX, kGraphHeight - maxGraphHeight * data[i]);
+    }
+    CGContextAddLineToPoint(ctx, kOffsetX + (sizeof(data) - 1) * kStepX, kGraphHeight);
+    CGContextClosePath(ctx);
+    
+    // CGContextDrawPath(ctx, kCGPathFill);
+    CGContextSaveGState(ctx);
+	CGContextClip(ctx);
+    
+    CGContextDrawLinearGradient(ctx, gradient, startPoint, endPoint, 0);
+    
+    CGContextRestoreGState(ctx);
+    CGColorSpaceRelease(colorspace);
+	CGGradientRelease(gradient);
+    
+    // Drawing the graph itself
+    
+    CGContextBeginPath(ctx);
+    CGContextMoveToPoint(ctx, kOffsetX, kGraphHeight - maxGraphHeight * data[0]);
+    for (int i = 1; i < sizeof(data); i++) 
+    {
+        CGContextAddLineToPoint(ctx, kOffsetX + i * kStepX, kGraphHeight - maxGraphHeight * data[i]);
+    }
+    
+    CGContextDrawPath(ctx, kCGPathStroke);
+    
+    // Drawing circles
+    
+    CGContextSetFillColorWithColor(ctx, [[UIColor colorWithRed:1.0 green:0.5 blue:0 alpha:1.0] CGColor]);
+    
+    for (int i = 1; i < sizeof(data) - 1; i++) 
+    {
+        float x = kOffsetX + i * kStepX;
+        float y = kGraphHeight - maxGraphHeight * data[i];
+        CGRect rect = CGRectMake(x - kCircleRadius, y - kCircleRadius, 2 * kCircleRadius, 2 * kCircleRadius);
+        CGContextAddEllipseInRect(ctx, rect);
+    }
+    CGContextDrawPath(ctx, kCGPathFillStroke);
+}
 
 - (void)drawBar:(CGRect)rect context:(CGContextRef)ctx 
 {
@@ -92,17 +164,19 @@ float data[] = {0.7, 0.4, 0.9, 1.0, 0.2, 0.85, 0.11, 0.75, 0.53, 0.44, 0.88, 0.7
     CGContextSetLineDash(context, 0, NULL, 0); // Remove the dash
     
     // Draw the bars
-    float maxBarHeight = kGraphHeight - kBarTop - kOffsetY;
+//    float maxBarHeight = kGraphHeight - kBarTop - kOffsetY;
+//    
+//    for (int i = 0; i < sizeof(data); i++)
+//    {
+//        float barX = kOffsetX + kStepX + i * kStepX - kBarWidth / 2;
+//        float barY = kBarTop + maxBarHeight - maxBarHeight * data[i];
+//        float barHeight = maxBarHeight * data[i];
+//        
+//        CGRect barRect = CGRectMake(barX, barY, kBarWidth, barHeight);
+//        [self drawBar:barRect context:context];
+//    }
     
-    for (int i = 0; i < sizeof(data); i++)
-    {
-        float barX = kOffsetX + kStepX + i * kStepX - kBarWidth / 2;
-        float barY = kBarTop + maxBarHeight - maxBarHeight * data[i];
-        float barHeight = maxBarHeight * data[i];
-        
-        CGRect barRect = CGRectMake(barX, barY, kBarWidth, barHeight);
-        [self drawBar:barRect context:context];
-    }
+    [self drawLineGraphWithContext:context];
 }
 
 
