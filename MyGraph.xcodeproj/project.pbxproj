@@ -18,6 +18,7 @@
 		B16E84831419FA1C00B10FC2 /* MyGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B16E84821419FA1C00B10FC2 /* MyGraphViewController.m */; };
 		B16E84861419FA1C00B10FC2 /* MyGraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B16E84841419FA1C00B10FC2 /* MyGraphViewController.xib */; };
 		B16E848E1421E2AC00B10FC2 /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = B16E848D1421E2AC00B10FC2 /* GraphView.m */; };
+		B1F880C814500807009885F5 /* PointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F880C714500807009885F5 /* PointerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,8 @@
 		B16E84851419FA1C00B10FC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MyGraphViewController.xib; sourceTree = "<group>"; };
 		B16E848C1421E2AC00B10FC2 /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
 		B16E848D1421E2AC00B10FC2 /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
+		B1F880C614500807009885F5 /* PointerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointerView.h; sourceTree = "<group>"; };
+		B1F880C714500807009885F5 /* PointerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +98,8 @@
 				B13C629E1424BF6D005DACC6 /* Artwork */,
 				B16E848C1421E2AC00B10FC2 /* GraphView.h */,
 				B16E848D1421E2AC00B10FC2 /* GraphView.m */,
+				B1F880C614500807009885F5 /* PointerView.h */,
+				B1F880C714500807009885F5 /* PointerView.m */,
 				B16E847B1419FA1C00B10FC2 /* MyGraphAppDelegate.h */,
 				B16E847C1419FA1C00B10FC2 /* MyGraphAppDelegate.m */,
 				B16E847E1419FA1C00B10FC2 /* MainWindow.xib */,
@@ -185,6 +190,7 @@
 				B16E847D1419FA1C00B10FC2 /* MyGraphAppDelegate.m in Sources */,
 				B16E84831419FA1C00B10FC2 /* MyGraphViewController.m in Sources */,
 				B16E848E1421E2AC00B10FC2 /* GraphView.m in Sources */,
+				B1F880C814500807009885F5 /* PointerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

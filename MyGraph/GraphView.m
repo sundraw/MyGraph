@@ -129,6 +129,41 @@ float data[] = {0.7, 0.4, 0.9, 1.0, 0.2, 0.85, 0.11, 0.75, 0.53, 0.44, 0.88, 0.7
 	CGGradientRelease(gradient);
 }
 
+CGRect touchAreas[kNumberOfBars];
+
+- (void)drawBarGraphWithContext:(CGContextRef)ctx 
+{
+    // Draw the bars
+    float maxBarHeight = kGraphHeight - kBarTop - kOffsetY;
+        
+    for (int i = 0; i < kNumberOfBars; i++)
+    {
+        float barX = kOffsetX + kStepX + i * kStepX - kBarWidth / 2;
+        float barY = kBarTop + maxBarHeight - maxBarHeight * data[i];
+        float barHeight = maxBarHeight * data[i];
+            
+        CGRect barRect = CGRectMake(barX, barY, kBarWidth, barHeight);
+        [self drawBar:barRect context:ctx];
+        touchAreas[i] = barRect;
+    }
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event 
+{	
+	UITouch *touch = [touches anyObject];
+	CGPoint point = [touch locationInView:self];
+    NSLog(@"Touch x:%f, y:%f", point.x, point.y);
+	
+	for (int i = 0; i < kNumberOfBars; i++) 
+    {
+		if (CGRectContainsPoint(touchAreas[i], point)) 
+        {
+            NSLog(@"Tapped a bar with index %d, value %f", i, data[i]);
+			break;
+		}
+	}
+}
+
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -163,19 +198,7 @@ float data[] = {0.7, 0.4, 0.9, 1.0, 0.2, 0.85, 0.11, 0.75, 0.53, 0.44, 0.88, 0.7
     CGContextStrokePath(context);
     CGContextSetLineDash(context, 0, NULL, 0); // Remove the dash
     
-    // Draw the bars
-//    float maxBarHeight = kGraphHeight - kBarTop - kOffsetY;
-//    
-//    for (int i = 0; i < sizeof(data); i++)
-//    {
-//        float barX = kOffsetX + kStepX + i * kStepX - kBarWidth / 2;
-//        float barY = kBarTop + maxBarHeight - maxBarHeight * data[i];
-//        float barHeight = maxBarHeight * data[i];
-//        
-//        CGRect barRect = CGRectMake(barX, barY, kBarWidth, barHeight);
-//        [self drawBar:barRect context:context];
-//    }
-    
+    //[self drawBarGraphWithContext:context];
     [self drawLineGraphWithContext:context];
 }
 
