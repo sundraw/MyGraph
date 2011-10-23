@@ -49,11 +49,11 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIView" id="815977349">
 								<reference key="NSNextResponder" ref="707168247"/>
-								<int key="NSvFlags">274</int>
+								<int key="NSvFlags">272</int>
 								<string key="NSFrameSize">{900, 300}</string>
 								<reference key="NSSuperview" ref="707168247"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="955515066"/>
+								<reference key="NSNextKeyView" ref="602638188"/>
 								<string key="NSReuseIdentifierKey">_NS:180</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
@@ -64,7 +64,7 @@
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
-							<object class="IBUIView" id="955515066">
+							<object class="IBUIView" id="602638188">
 								<reference key="NSNextResponder" ref="707168247"/>
 								<int key="NSvFlags">274</int>
 								<string key="NSFrameSize">{900, 300}</string>
@@ -160,7 +160,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="815977349"/>
-							<reference ref="955515066"/>
+							<reference ref="602638188"/>
 						</object>
 						<reference key="parent" ref="774585933"/>
 						<string key="objectName">Scroll View</string>
@@ -176,7 +176,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
-						<reference key="object" ref="955515066"/>
+						<reference key="object" ref="602638188"/>
 						<reference key="parent" ref="707168247"/>
 						<string key="objectName">Pointer View</string>
 					</object>

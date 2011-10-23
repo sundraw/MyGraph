@@ -200,6 +200,26 @@ CGRect touchAreas[kNumberOfBars];
     
     //[self drawBarGraphWithContext:context];
     [self drawLineGraphWithContext:context];
+    
+    CGContextSetTextMatrix(context, CGAffineTransformMake(1.0, 0.0, 0.0, -1.0, 0.0, 0.0));
+    CGContextSelectFont(context, "Helvetica", 18, kCGEncodingMacRoman);
+	CGContextSetTextDrawingMode(context, kCGTextFill);
+	CGContextSetFillColorWithColor(context, [[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] CGColor]);
+    for (int i = 1; i < sizeof(data); i++) 
+    {
+        NSString *theText = [NSString stringWithFormat:@"%d", i];
+        CGSize labelSize = [theText sizeWithFont:[UIFont fontWithName:@"Helvetica" size:18]];
+        CGContextShowTextAtPoint(context, kOffsetX + i * kStepX - labelSize.width/2, kGraphBottom - 5, [theText cStringUsingEncoding:NSUTF8StringEncoding], [theText length]);
+    }
+    
+    // Drawing text
+    //CGContextSetTextMatrix(context, CGAffineTransformMake(1.0, 0.0, 0.0, -1.0, 0.0, 0.0));
+    //CGContextSetTextMatrix(context, CGAffineTransformRotate(CGAffineTransformMake(1.0, 0.0, 0.0, -1.0, 0.0, 0.0), M_PI / 2));
+    //CGContextSelectFont(context, "Helvetica", 44, kCGEncodingMacRoman);
+	//CGContextSetTextDrawingMode(context, kCGTextFill);
+	//CGContextSetFillColorWithColor(context, [[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] CGColor]);
+    //NSString *theText = @"Hi there!";
+    //CGContextShowTextAtPoint(context, 100, 200, [theText cStringUsingEncoding:NSUTF8StringEncoding], [theText length]);
 }
 
 
